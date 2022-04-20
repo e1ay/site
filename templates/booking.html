@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content2 %}
+<section class="page-content">
+    <div class="container">
+        <div class="page-content-wrapper">
+            <h1 class="center">Бронь стола</h1>
+            {% if current_user.get_id() == '1'%}
+            <h6 class="center">Для администратора нельзя забронировать стол</h6>
+
+            {% for desk in desks %}
+            <hr>
+            <h3 class="center">Бронь № {{ desk.id }}</h3>
+            <h4>Дата: {{ desk.date }}</h4>
+            <h4>Время: {{ desk.time }}</h4>
+            <h4>Мест: {{desk.places }}</h4>
+            <h4>Имя : {{ desk.name }}</h4>
+            <h4>Фамилия: {{ desk.surname }}</h4>
+            <div class="del">
+                <a href="desks_delete/{{ desk.id }}">Удалить бронь</a>
+            </div>
+
+            <hr>
+            {% endfor %}
+            {% else %}
+
+
+
+
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+
+                <div class="date">
+                    <h5>Дата:</h5>
+                    {{ form.date(class="form-control") }}
+                </div>
+                <div class="time">
+                    <h5>Время:</h5>
+                    {{ form.hours.select }}
+                    {{ form.hours(class='form-control') }}
+
+                    {{ form.minut.select }}
+                    {{ form.minut(class='form-control') }}
+
+                </div>
+                <div class="places">
+                    <h5>Количество мест:</h5>
+
+                    {{ form.places.select }}
+                    {{ form.places(class='form-control') }}
+                </div>
+                <div class="info center">
+                    <div class="name">
+                        <h6>Имя: </h6>
+                        {{ form.name.input }}
+                        {{ form.name(class='form-control')}}
+                    </div>
+                    <div class="surname">
+                        <h6>Фамилия: </h6>
+                        {{ form.surname.input }}
+                        {{ form.surname(class='form-control') }}
+                    </div>
+                </div>
+                <div class="btnnn">
+                    {{ form.submit(type="submit", class="btn btn-primary") }}
+                </div>
+
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}

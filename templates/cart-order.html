@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content2 %}
+<section class="cart-product cart-product_order profile">
+    <div class="container">
+        <div class="cart-wrapper">
+            <div class="cart-info">
+                <div class="cart-top">
+                    <h1 class="title">
+                        Оформление заказа
+                    </h1>
+                    <div class="sub-title">
+                        Вы заказали:
+                    </div>
+                    <div class="cart-product-items">
+                        {% for item in order%}
+                        <div class="cart-product-item">
+                            <div class="cart-product-left d-flex">
+                                <div class="cart-product-img">
+                                    <a href="card/{{ item.id }}"><img src="../static/img/food_img/{{ item.pic }}"
+                                                                      alt=""></a>
+                                </div>
+                                <div class="cart-product-name">
+                                    <a href="card/{{ item.id }}">{{ item.name }}</a>
+                                </div>
+                                <div class="cart-product-price">
+                                    {{ item.price }} ₽
+                                </div>
+                                <div class="cart-product-del">
+                                    <a href="cart-delete/{{ item.id }}">Удалить</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="cart-sum">
+                    <div class="block-info">
+                        <div class="left-info">
+                            <div class="line">
+                                <span>Итого</span><b>{{ all_price }} ₽</b>
+                            </div>
+                            <div class="line">
+                                <span>Доставка</span><b class="green">{{ divi }} ₽</b>
+                            </div>
+                            <div class="or">
+                                <span>или</span>
+                            </div>
+                            <div class="get">
+                                <span>Самовывоз - бесплатно</span></b>
+                            </div>
+                        </div>
+                        <div class="right-info">
+                            <span>Итого к оплате</span><b>{{ total }} ₽</b>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="cart-sidebar">
+                <form action="" method="post" enctype=multipart/form-data>
+                    {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+                    <div class="form-line">
+                        <div class="label">ФИО</div>
+                        <input type="text"
+                               placeholder="{{current_user.surname}} {{current_user.name}} {{current_user.patronymic}}"
+                               disabled>
+                    </div>
+                    <div class="form-line">
+                        <div class="label">Телефон</div>
+                        <input type="text" placeholder="{{current_user.telephone}}" disabled>
+                    </div>
+                    <div class="form-line">
+                        <div class="label">Адрес доставки</div>
+                        <input type="text" placeholder="Введите адрес доставки">
+                    </div>
+                    <div class="form-line">
+                        <div class="label">Способ оплаты</div>
+                        {{ form.method.select }}
+                        {{ form.method(class='form-control') }}
+                    </div>
+                    <button>Оформить заказ</button>
+                    {{ message }}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

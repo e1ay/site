@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content2 %}
+
+<section class="card">
+    <div class="container">
+        <div class="card-top">
+            <div class="card-img">
+                <img src="../static/img/food_img/{{ card.pic }}" alt="">
+            </div>
+            <div class="card-sidebar">
+                <div class="title">{{ card.name }}</div>
+                <div class="price">
+                    <span>Цена за уп.</span> <b>{{ card.price }}</b>
+                </div>
+                <div class="pay-bottom">
+                    <div class="to-pay">
+                        <span>Итого к оплате</span>
+                        <b>{{ card.price }} ₽</b>
+                    </div>
+                    {% if current_user.is_authenticated %}
+                        <div class="pay-block">
+                            <a href="../to-cart/{{ card.id }}"><button class="pay-popup">Купить</button></a>
+                        </div>
+                    {% else %}
+                    <div class="pay-block">
+                        <h5 class="center">Вы не авторизованны</h5>
+                        <a href="../login" class="loginn">Авторизоваться</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card-bottom">
+            <div class="card-info">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#about_product">О товаре</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active container" id="about_product">
+                        <h2 class="tab">Описание</h2>
+                        <p>{{ card.desc }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-sidebar">
+                <div class="purchase-info">
+                    <div class="title">
+                        Закажите на 3000 RUB и получите
+                    </div>
+                    <div class="line">
+                        <img src="../static/img/veh.svg" alt="">
+                        <span><b>Бесплатная доставка</b></span>
+                    </div>
+                    <div class="range-slide">
+                        <div class="range-text">
+                            Осталось <b>{{ need }} RUB</b> до бесплатной доставки
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="delivery">
+    <div class="container">
+        <div class="block">
+            <h4 class="title">Бесплатная доставка по Кургану <br> и Области от 2999 RUB!</h4>
+            <a href="">Оформить</a>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+

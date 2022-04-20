@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="error">
+    <h2 class="bad">{{ message }}</h2>
+    <h2 class="good">{{ message2 }}</h2>
+</section>
+<section class="home-banner">
+    <div class="container">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide block">
+                    <img src="static/img/banner.png" alt="">
+                    <h2>Скидка на первый заказ.</h2>
+                    <p>Сэкономнте 500 рублей </p>
+                </div>
+                <div class="swiper-slide block">
+                    <img src="static/img/banner.png" alt="">
+                    <h2>Подарок на первый заказ.</h2>
+                    <p>Получите 500 рублей за подписку на рассылку</p>
+                </div>
+                <div class="swiper-slide block">
+                    <img src="static/img/banner.png" alt="">
+                    <h2>Подарок на первый заказ.</h2>
+                    <p>Получите 500 рублей за подписку на рассылку</p>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+<section class="home-products">
+    <div class="container">
+        {% if current_user.get_id() == '1' %}
+        <div class="btn">
+            <a href="addfood">Добавить продукт</a>
+        </div>
+        {% endif %}
+        <!--<h3 class="all_products">Супы</h3>-->
+        <div class="products-wrapper">
+            {% for food in foods %}
+            <div class="product">
+                <div class="img">
+                    <a href="card/{{ food.id }}"><img src="static/img/food_img/{{food.pic}}" alt=""></a>
+                </div>
+                <a href="card/{{ food.id }} " class="title">{{ food.name }}</a>
+                <p class="description">{{ food.desc }}</p>
+                <div class="price">
+                    <b>1 050 ₽/кг</b> <span>За 500гр.</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="delivery">
+    <div class="container">
+        <div class="block">
+            <h4 class="title">Бесплатная доставка по Кургану от 2999 RUB!</h4>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
